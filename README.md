@@ -16,8 +16,27 @@ les interventions sous la forme d'une conversation chronologique.
 
 ## Installation
 
-Prérequis : Windows 10/11, Python 3.11 64 bits et une connexion Internet lors du
-premier téléchargement du modèle.
+[![Télécharger Voice Master](https://img.shields.io/badge/Télécharger-Voice_Master-7C5CFC?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/aminechaff/voice_detection/releases/latest/download/VoiceMaster.exe)
+
+1. Téléchargez **VoiceMaster.exe** avec le bouton ci-dessus.
+2. Double-cliquez sur le fichier.
+3. Une icône **Voice Master** est créée sur le Bureau.
+
+Le lanceur installe l'application dans le profil Windows, sans fenêtre PowerShell et
+sans demander d'installer Python. Lors des lancements suivants, il vérifie GitHub,
+applique une éventuelle mise à jour, puis ouvre directement Voice Master. Une
+installation existante reste utilisable hors connexion.
+
+Prérequis : Windows 10/11 64 bits et une connexion Internet pour la première
+installation ainsi que pour le premier téléchargement du modèle Whisper.
+
+Windows peut afficher un avertissement SmartScreen puisque l'exécutable open source
+n'est pas signé avec un certificat commercial. Le code du lanceur est disponible dans
+[`launcher/VoiceMasterLauncher.cs`](launcher/VoiceMasterLauncher.cs).
+
+### Lancement depuis les sources
+
+Pour le développement, Python 3.11 64 bits reste nécessaire :
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
@@ -26,7 +45,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 
 Le script crée un environnement `.venv`, installe les dépendances et démarre
 l'application. Si [`uv`](https://docs.astral.sh/uv/) est disponible, il est utilisé
-automatiquement ; sinon le lanceur emploie `venv` et `pip`.
+automatiquement ; sinon le script emploie `venv` et `pip`.
 
 Installation manuelle :
 

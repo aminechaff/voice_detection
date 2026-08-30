@@ -51,6 +51,13 @@ class VoiceMasterApp(ctk.CTk):
         self.geometry("1080x760")
         self.minsize(920, 680)
         self.configure(fg_color=APP_BG)
+        for icon_path in (
+            Path.cwd() / "assets" / "voice-master.ico",
+            Path(__file__).resolve().parents[2] / "assets" / "voice-master.ico",
+        ):
+            if icon_path.exists():
+                self.iconbitmap(icon_path)
+                break
 
         self._temporary_audio = tempfile.TemporaryDirectory(prefix="voice-master-")
         self.temporary_dir = Path(self._temporary_audio.name)

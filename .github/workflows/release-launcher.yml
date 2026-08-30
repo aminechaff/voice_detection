@@ -1,0 +1,52 @@
+name: Publier le lanceur Windows
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "launcher/**"
+      - "assets/voice-master.ico"
+      - ".github/workflows/release-launcher.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Compiler le lanceur
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          & "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe" `
+            /nologo /target:winexe /optimize+ `
+            /out:"dist\VoiceMaster.exe" `
+            /win32icon:"assets\voice-master.ico" `
+            /reference:System.dll `
+            /reference:System.Core.dll `
+            /reference:System.Drawing.dll `
+            /reference:System.IO.Compression.dll `
+            /reference:System.IO.Compression.FileSystem.dll `
+            /reference:System.Windows.Forms.dll `
+            /reference:Microsoft.CSharp.dll `
+            "launcher\VoiceMasterLauncher.cs"
+
+      - name: Publier le téléchargement
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if (-not (gh release view latest --repo $env:GITHUB_REPOSITORY 2>$null)) {
+            gh release create latest `
+              --repo $env:GITHUB_REPOSITORY `
+              --title "Voice Master pour Windows" `
+              --notes "Téléchargez VoiceMaster.exe puis double-cliquez dessus. Le lanceur installe et met à jour automatiquement Voice Master." `
+              --latest
+          }
+          gh release upload latest "dist\VoiceMaster.exe" `
+            --repo $env:GITHUB_REPOSITORY `
+            --clobber
