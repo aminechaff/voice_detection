@@ -16,7 +16,7 @@ les interventions sous la forme d'une conversation chronologique.
 
 ## Installation
 
-[![Télécharger Voice Master](https://img.shields.io/badge/Télécharger-Voice_Master-7C5CFC?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/aminechaff/voice_detection/releases/latest/download/VoiceMaster.exe)
+[![Télécharger Voice Master](https://img.shields.io/badge/Télécharger-Voice_Master-7C5CFC?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/aminechaff/voice_detection/releases/download/latest/VoiceMaster.exe?download=1)
 
 1. Téléchargez **VoiceMaster.exe** avec le bouton ci-dessus.
 2. Double-cliquez sur le fichier.
